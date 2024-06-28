@@ -20,9 +20,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       
       home: AnimatedSplashScreen(
-        splash: 'assets/logo.png',
+        splash: 'assets/images/logo.png',
         splashIconSize: 2000.0,
         centered: true,
         nextScreen: OnboardingScreen(),
@@ -61,12 +62,15 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
-              
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: buttonColor, // Set the button color
-                  padding: EdgeInsets.symmetric(horizontal: 28.0, vertical: 16), // Increase padding
+                  backgroundColor: darkBackgroundColor, // Set the button color
+                  padding: EdgeInsets.symmetric(horizontal: 28.0, vertical: 16),
+                  elevation: 20,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  shadowColor: Colors.black.withOpacity(0.4),
                 ),
-                
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -74,12 +78,18 @@ class HomeScreen extends StatelessWidget {
                         builder: (context) => CreateOrImportPage()),
                   );
                 },
-                child: Text('Generate Wallet', style: TextStyle(
-                  color: borderColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold
-                ),),
+                child: Text(
+                  'Generate Wallet',
+                  style: TextStyle(
+                    color: borderColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    fontFamily:
+                        'RetroFont', // Replace with your desired retro font
+                  ),
+                ),
               ),
+
             ],
           ),
         ),

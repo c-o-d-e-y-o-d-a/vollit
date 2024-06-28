@@ -4,7 +4,6 @@ import 'package:vollit_wallet/pages/wallet.dart';
 import 'package:vollit_wallet/providers/wallet_provider.dart';
 import 'package:vollit_wallet/utils/constants.dart';
 
-
 class VerifyMnemonicPage extends StatefulWidget {
   final String mnemonic;
 
@@ -36,18 +35,21 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
     void navigateToWalletPage() {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => WalletPage()),
+        MaterialPageRoute(builder: (context) => const WalletPage()),
       );
     }
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Verify Mnemonic', style: TextStyle(color: borderColor, fontWeight: FontWeight.bold),),
+        title: const Text(
+          'Verify Mnemonic',
+          style: TextStyle(color: borderColor, fontWeight: FontWeight.w500),
+        ),
         backgroundColor: buttonColor,
       ),
       body: Container(
-        decoration: BoxDecoration(color: darkBackgroundColor),
+        decoration: const BoxDecoration(color: darkBackgroundColor),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -55,40 +57,69 @@ class _VerifyMnemonicPageState extends State<VerifyMnemonicPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text(
-                'Please verify your mnemonic phrase:' ,
+                'Please verify your mnemonic phrase:',
                 style: TextStyle(fontSize: 18.0, color: borderColor),
               ),
               const SizedBox(height: 26.0),
               TextField(
-                 style: TextStyle(color: Colors.white),
-                
                 onChanged: (value) {
                   setState(() {
                     verificationText = value;
                   });
                 },
-                decoration: const InputDecoration(
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
                   labelText: 'Enter mnemonic phrase',
-                  labelStyle:  TextStyle(color: Colors.white),
-                  
-                  
+                  labelStyle: const TextStyle(color: borderColor),
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.1),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: borderColor),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: borderColor),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
               ),
               const SizedBox(height: 16.0),
               ElevatedButton(
-                onPressed: () {
-                  verifyMnemonic();
-                },
-                child: const Text('Verify'),
+                onPressed: verifyMnemonic,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: buttonColor,
+                  padding: const EdgeInsets.all(16.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                child: const Text(
+                  'Verify',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontFamily: 'RetroFont',
+                  ),
+                ),
               ),
-              const SizedBox(height: 24.0),
+              const SizedBox(height: 40.0),
               ElevatedButton(
                 onPressed: isVerified ? navigateToWalletPage : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: buttonColor,
                   foregroundColor: Colors.white,
+                  backgroundColor: buttonColor,
+                  padding: const EdgeInsets.all(16.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
-                child: const Text('Next ->'),
+                child: const Text(
+                  'Next ->',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontFamily: 'RetroFont',
+                  ),
+                ),
               ),
             ],
           ),

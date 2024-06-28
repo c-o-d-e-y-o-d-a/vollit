@@ -23,10 +23,11 @@ class _SendTokensPageState extends State<SendTokensPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: buttonColor,
         title: const Text(
           'Send Tokens',
-          style: TextStyle(color: borderColor),
+          style:  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       body: Container(
@@ -65,13 +66,14 @@ class _SendTokensPageState extends State<SendTokensPage> {
                         decoration: InputDecoration(
                           labelText: 'Amount',
                           labelStyle: TextStyle(color: Colors.white),
-                          prefixIcon: Icon(Icons.attach_money, color: Colors.white),
+                          prefixIcon:
+                              Icon(Icons.attach_money, color: Colors.white),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
-                        keyboardType:
-                            const TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                       ),
                     ],
                   ),
@@ -96,7 +98,8 @@ class _SendTokensPageState extends State<SendTokensPage> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 15.0), backgroundColor: buttonColor,
+                  padding: EdgeInsets.symmetric(vertical: 15.0),
+                  backgroundColor: buttonColor,
                   textStyle: TextStyle(fontSize: 18.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -104,7 +107,7 @@ class _SendTokensPageState extends State<SendTokensPage> {
                 ),
                 child: isLoading
                     ? CircularProgressIndicator(color: Colors.white)
-                    : Text('Send'),
+                    : Text('Send', style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
@@ -114,7 +117,7 @@ class _SendTokensPageState extends State<SendTokensPage> {
   }
 
   Future<void> sendTransaction(String receiver, EtherAmount txValue) async {
-    var apiUrl = "Your RPC Url"; // Replace with your API
+    var apiUrl = "https://eth-sepolia.g.alchemy.com/v2/pErDXizUIHr5qdVzRNtKqGZYXO1wW5o5"; // Replace with your API
     var httpClient = http.Client();
     var ethClient = Web3Client(apiUrl, httpClient);
 

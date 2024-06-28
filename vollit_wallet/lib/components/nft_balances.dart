@@ -25,21 +25,28 @@ class _NFTListPageState extends State<NFTListPage> {
     _loadNFTList();
   }
 
-  Future<void> _loadNFTList() async {
-    final response = await http.get(
+ Future<void> _loadNFTList() async {
+    try {
+      final response = await http.get(
         Uri.parse(
-            'http://192.168.29.148:5002/get_user_nfts?address=${widget.address}&chain=${widget.chain}'),
-        headers: {'Content-Type': 'application/json'});
+            'http://192.168.29.148:5002/get-user-nfts//${widget.chain}//${widget.address}'),
+        headers: {'Content-Type': 'application/json'},
+      );
 
-    if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body);
-      setState(() {
-        _nftList = jsonData['result'];
-      });
-    } else {
-      throw Exception('Failed to load NFT list');
+      if (response.statusCode == 200) {
+        final jsonData = jsonDecode(response.body);
+        setState(() {
+          _nftList =
+              jsonData['result'] ?? []; 
+        });
+      } else {
+        throw Exception('Failed to load NFT list: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error loading NFT list: $e');
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +65,7 @@ class _NFTListPageState extends State<NFTListPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 200, // adjust the height as needed
+                  height: 200, 
                   child: nft['normalized_metadata']['image'] != null
                       ? Image.network(
                           nft['normalized_metadata']['image'],

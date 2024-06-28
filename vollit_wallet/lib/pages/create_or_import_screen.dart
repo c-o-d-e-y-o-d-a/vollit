@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vollit_wallet/pages/generate_mnenomic_page.dart';
 import 'package:vollit_wallet/utils/constants.dart';
-
 import 'import_wallet.dart';
-
 
 class CreateOrImportPage extends StatelessWidget {
   const CreateOrImportPage({super.key});
@@ -24,30 +22,18 @@ class CreateOrImportPage extends StatelessWidget {
               child: const Text(
                 'Vollit',
                 style: TextStyle(
-                  fontSize: 24.0,
+                  fontSize: 36.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white
+                  color: Colors.white,
+                  fontFamily:
+                      'RetroFont', // Replace with your desired retro font
                 ),
               ),
             ),
             const SizedBox(height: 24.0),
-
-            // Logo
-            // Container(
-            //   width: double.infinity,
-            //   alignment: Alignment.center,
-            //   child: SizedBox(
-            //     width: 150,
-            //     height: 200,
-            //     child: Image.asset(
-            //       'assets/images/logo.png',
-            //       fit: BoxFit.contain,
-            //     ),
-            //   ),
-            // ),
             const SizedBox(height: 50.0),
 
-            // Login button
+            // Create Wallet button
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -58,26 +44,29 @@ class CreateOrImportPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    buttonColor, // Customize button background color
-                foregroundColor: Colors.white, // Customize button text color
+                foregroundColor: Colors.white,
+                backgroundColor: buttonColor, // Customize button text color
                 padding: const EdgeInsets.all(16.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                elevation: 10,
+                shadowColor: Colors.black.withOpacity(0.3),
               ),
               child: const Text(
                 'Create Wallet',
                 style: TextStyle(
                   fontSize: 18.0,
-                  
+                  fontFamily:
+                      'RetroFont', // Replace with your desired retro font
                 ),
               ),
             ),
-
             const SizedBox(height: 16.0),
 
-            // Register button
+            // Import from Seed button
             ElevatedButton(
               onPressed: () {
-                // Add your register logic here
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -86,19 +75,24 @@ class CreateOrImportPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    borderColor, // Customize button background color
-                foregroundColor: Colors.black, // Customize button text color
+                foregroundColor: Colors.black,
+                backgroundColor: borderColor, // Customize button text color
                 padding: const EdgeInsets.all(16.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                elevation: 10,
+                shadowColor: Colors.black.withOpacity(0.3),
               ),
               child: const Text(
                 'Import from Seed',
                 style: TextStyle(
                   fontSize: 18.0,
+                  fontFamily:
+                      'RetroFont', // Replace with your desired retro font
                 ),
               ),
             ),
-
             const SizedBox(height: 24.0),
 
             // Footer
@@ -109,6 +103,8 @@ class CreateOrImportPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12.0,
                   color: Colors.grey,
+                  fontFamily:
+                      'RetroFont', // Replace with your desired retro font
                 ),
               ),
             ),

@@ -32,27 +32,19 @@ class _WalletPageState extends State<WalletPage> {
     String? privateKey = prefs.getString('privateKey');
     if (privateKey != null) {
       final walletProvider = WalletProvider();
-      await walletProvider.loadPrivateKey(pvKey);
+      await walletProvider.loadPrivateKey(privateKey);
       EthereumAddress address = await walletProvider.getPublicKey(privateKey);
-      print(address.hex);
       setState(() {
         walletAddress = address.hex;
         pvKey = privateKey;
       });
-      print(pvKey);
 
       String response = await getBalances(address.hex, 'sepolia');
-
       dynamic data = json.decode(response);
-
       String newBalance = data['balance'] ?? '0';
 
-      // Transform balance from wei to ether
-      EtherAmount latestBalance =
-          EtherAmount.fromBigInt(EtherUnit.wei, BigInt.parse(newBalance));
-
-      String latestBalanceInEther =
-          latestBalance.getValueInUnit(EtherUnit.ether).toString();
+      EtherAmount latestBalance = EtherAmount.fromBigInt(EtherUnit.wei, BigInt.parse(newBalance));
+      String latestBalanceInEther = latestBalance.getValueInUnit(EtherUnit.ether).toString();
 
       setState(() {
         balance = latestBalanceInEther;
@@ -64,9 +56,10 @@ class _WalletPageState extends State<WalletPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text(
           'Wallet',
-          style: TextStyle(color: borderColor),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: buttonColor,
       ),
@@ -83,8 +76,9 @@ class _WalletPageState extends State<WalletPage> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        border: Border.all(width: 1, color: buttonColor),
-                        borderRadius: BorderRadius.circular(8)),
+                      border: Border.all(width: 1, color: buttonColor),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -92,24 +86,28 @@ class _WalletPageState extends State<WalletPage> {
                           const Text(
                             'Wallet Address',
                             style: TextStyle(
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold,
-                                color: borderColor),
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold,
+                              color: borderColor,
+                            ),
                             textAlign: TextAlign.center,
                           ),
                           const SizedBox(height: 16.0),
                           Text(
                             walletAddress,
                             style: const TextStyle(
-                                fontSize: 20.0, color: buttonColor),
+                              fontSize: 20.0,
+                              color: buttonColor,
+                            ),
                             textAlign: TextAlign.center,
                           ),
                           InkWell(
-                              onTap: () {},
-                              child:Icon(
-                                Icons.copy,
-                                color: buttonColor,
-                              ))
+                            onTap: () {},
+                            child: Icon(
+                              Icons.copy,
+                              color: buttonColor,
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -118,15 +116,19 @@ class _WalletPageState extends State<WalletPage> {
                   const Text(
                     'Balance',
                     style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: borderColor),
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: borderColor,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16.0),
                   Text(
                     balance,
-                    style: const TextStyle(fontSize: 20.0, color: borderColor),
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -138,34 +140,52 @@ class _WalletPageState extends State<WalletPage> {
                 Column(
                   children: [
                     FloatingActionButton(
-                      heroTag: 'sendButton', // Unique tag for send button
+                      heroTag: 'sendButton',
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  SendTokensPage(privateKey: pvKey)),
+                            builder: (context) => SendTokensPage(privateKey: pvKey),
+                          ),
                         );
                       },
-                      child: const Icon(Icons.send),
+                      child: const Icon(
+                        Icons.send,
+                        color: buttonColor,
+                      ),
+                      backgroundColor: borderColor,
                     ),
                     const SizedBox(height: 8.0),
-                    const Text('Send'),
+                    const Text(
+                      'Send',
+                      style: TextStyle(
+                        color: borderColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
                 Column(
                   children: [
                     FloatingActionButton(
-                      heroTag: 'refreshButton', // Unique tag for send button
+                      heroTag: 'refreshButton',
                       onPressed: () {
-                        setState(() {
-                          // Update any necessary state variables or perform any actions to refresh the widget
-                        });
+                        setState(() {});
                       },
-                      child: const Icon(Icons.replay_outlined),
+                      child: const Icon(
+                        Icons.replay_outlined,
+                        color: buttonColor,
+                      ),
+                      backgroundColor: borderColor,
                     ),
                     const SizedBox(height: 8.0),
-                    const Text('Refresh'),
+                    const Text(
+                      'Refresh',
+                      style: TextStyle(
+                        color: borderColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -177,7 +197,7 @@ class _WalletPageState extends State<WalletPage> {
                 child: Column(
                   children: [
                     const TabBar(
-                      labelColor: Colors.blue,
+                      labelColor: buttonColor,
                       tabs: [
                         Tab(text: 'Assets'),
                         Tab(text: 'NFTs'),
@@ -187,7 +207,6 @@ class _WalletPageState extends State<WalletPage> {
                     Expanded(
                       child: TabBarView(
                         children: [
-                          // Assets Tab
                           Column(
                             children: [
                               Card(
@@ -195,14 +214,14 @@ class _WalletPageState extends State<WalletPage> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       const Text(
                                         'Sepolia ETH',
                                         style: TextStyle(
                                           fontSize: 24.0,
                                           fontWeight: FontWeight.bold,
+                                          color: buttonColor,
                                         ),
                                       ),
                                       Text(
@@ -210,6 +229,7 @@ class _WalletPageState extends State<WalletPage> {
                                         style: const TextStyle(
                                           fontSize: 24.0,
                                           fontWeight: FontWeight.bold,
+                                          color: buttonColor,
                                         ),
                                       )
                                     ],
@@ -218,25 +238,26 @@ class _WalletPageState extends State<WalletPage> {
                               )
                             ],
                           ),
-                          // NFTs Tab
                           SingleChildScrollView(
-                              child: NFTListPage(
-                                  address: walletAddress, chain: 'sepolia')),
-                          // Activities Tab
+                            child: NFTListPage(address: walletAddress, chain: 'sepolia'),
+                          ),
                           Center(
                             child: ListTile(
                               leading: const Icon(Icons.logout),
-                              title: const Text('Logout'),
+                              title: const Text(
+                                'Logout',
+                                style: TextStyle(
+                                  color: buttonColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               onTap: () async {
-                                SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
                                 await prefs.remove('privateKey');
-                                // ignore: use_build_context_synchronously
                                 Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CreateOrImportPage(),
+                                    builder: (context) => const CreateOrImportPage(),
                                   ),
                                   (route) => false,
                                 );

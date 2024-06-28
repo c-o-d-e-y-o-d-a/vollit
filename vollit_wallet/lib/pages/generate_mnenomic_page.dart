@@ -19,84 +19,129 @@ class GenerateMnemonicPage extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Mnemonic Copied to Clipboard')),
       );
-
-      
     }
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: buttonColor,
         centerTitle: true,
-        title: const Text('Generate Mnemonic', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+        title: const Text(
+          'Generate Mnemonic',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
       body: Container(
-        decoration: BoxDecoration(
-          color: darkBackgroundColor
+        decoration: const BoxDecoration(
+          color: darkBackgroundColor,
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: 20),
               const Text(
                 'Please store this mnemonic \nphrase safely:',
-                style: TextStyle(fontSize: 18.0, color: borderColor),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 22.0,
+                  color: borderColor,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
-              const SizedBox(height: 24.0),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: List.generate(
-                  mnemonicWords.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        
-                        border: Border.all( color: borderColor, width: 1),
-                        borderRadius: BorderRadius.all(Radius.elliptical(8, 4))
-                      ),
-                      child: Center(
-                        child: Text(
-                          '${index + 1}. ${mnemonicWords[index]}',
-                          style: const TextStyle(fontSize: 16.0, color: borderColor),
-                        ),
+              const SizedBox(height: 36.0),
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 16.0,
+                    crossAxisSpacing: 8.0,
+                    childAspectRatio: 3,
+                  ),
+                  itemCount: mnemonicWords.length,
+                  itemBuilder: (context, index) => Card(
+                    color: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                      side: BorderSide(color: borderColor, width: 1),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${index + 1}. ${mnemonicWords[index]}',
+                        style:
+                            const TextStyle(fontSize: 16.0, color: borderColor),
                       ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 24.0),
               ElevatedButton.icon(
-                onPressed: () {
-                  copyToClipboard();
-                },
-                icon: const Icon(Icons.copy, color: borderColor,),
-                label: const Text('Copy to Clipboard', style: TextStyle(color: borderColor),),
+                onPressed: copyToClipboard,
+                icon: const Icon(Icons.copy, color: Colors.black),
+                label: const Text('Copy to Clipboard',
+                    style: TextStyle(color: Colors.black)),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: buttonColor,
-                  padding: const EdgeInsets.symmetric(vertical: 18.0, horizontal: 6),
-                  textStyle: const TextStyle(fontSize: 16.0),
-                  elevation: 4,
-                  shadowColor: Colors.black.withOpacity(0.4),
+                  backgroundColor: borderColor,
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
                 ),
               ),
-              InkWell(
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          VerifyMnemonicPage(mnemonic: mnemonic),
+              const SizedBox(height: 12.0),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF6D34D3), Color(0xFF5A15AB)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
                     ),
-                  );
-
-                },
-                child: Container(
-                  child:Text('I have safely stored the mnenomic \n ->', style: TextStyle(color: Colors.white),)
+                  ],
                 ),
-              )
-                
-              
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            VerifyMnemonicPage(mnemonic: mnemonic),
+                      ),
+                    );
+                  },
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16.0, horizontal: 24.0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                  child: Row(
+                    children: const [
+                      Text(
+                        'I have safely stored the mnemonic',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.0,
+                          fontFamily: 'RetroFont',
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Icon(Icons.arrow_forward),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),

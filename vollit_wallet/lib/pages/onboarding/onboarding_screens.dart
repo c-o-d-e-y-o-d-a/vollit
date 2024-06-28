@@ -61,7 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   SizedBox(
                     height: 60,
                     width: 60,
@@ -76,7 +76,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           );
                         } else {
                           _pageController.nextPage(
-                            duration: Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 300),
                             curve: Curves.ease,
                           );
                         }
@@ -85,7 +85,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         shape: const CircleBorder(),
                         backgroundColor: buttonColor,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_forward,
                         color: Colors.white,
                       ),
@@ -113,12 +113,12 @@ class DotIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       height: isActive ? 12 : 4,
       width: 12,
       decoration: BoxDecoration(
         color: isActive ? Colors.yellow : Colors.yellow.withOpacity(0.4),
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
   }
@@ -139,18 +139,19 @@ class Onboard {
 final List<Onboard> demoData = [
   Onboard(
     image: 'assets/images/onboard1.png',
-    title: 'Safe and Secure Cryptocurrency wallet',
+    title: 'Safe and Secure Cryptocurrency Wallet',
     description: 'Secure way of sending and receiving cryptocurrency',
   ),
   Onboard(
     image: 'assets/images/onboard2.png',
-    title: 'View your NFTs and asset details',
-    description: 'Connect with your college community and stay updated.',
+    title: 'View Your NFTs and Assets',
+    description: 'View your NFTs and digital assets securely',
   ),
   Onboard(
     image: 'assets/images/onboard3.png',
-    title: 'Share your moments with friends!',
-    description: 'Share your favorite moments with your college friends.',
+    title: 'Send Crypto Safely',
+    description:
+        'With us, you don\'t need to worry about any security-related issues.',
   ),
 ];
 
@@ -188,7 +189,7 @@ class OnBoardingContent extends StatelessWidget {
           child: Text(
             description,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w400,
                 color: Color.fromARGB(255, 133, 133, 132)),
