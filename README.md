@@ -85,14 +85,18 @@ flutter run
 ```
 
 ##Screenshots
-<img src="vollit_wallet/assets/readme_screens/choice.jpeg" width="270" height="480" alt="choice">
-<img src="vollit_wallet/assets/readme_screens/generate.jpeg" width="270" height="480" alt="generate">
-<img src="vollit_wallet/assets/readme_screens/genMnenomic.jpeg" width="270" height="480" alt="genMnenomic">
-<img src="vollit_wallet/assets/readme_screens/importSeed.jpeg" width="270" height="480" alt="importSeed">
-<img src="vollit_wallet/assets/readme_screens/onb1.jpeg" width="270" height="480" alt="onb1">
-<img src="vollit_wallet/assets/readme_screens/onb2.jpeg" width="270" height="480" alt="onb2">
-<img src="vollit_wallet/assets/readme_screens/onb3.jpeg" width="270" height="480" alt="onb3">
-<img src="vollit_wallet/assets/readme_screens/splash.jpeg" width="270" height="480" alt="splash">
-<img src="vollit_wallet/assets/readme_screens/verify.jpeg" width="270" height="480" alt="verify">
-<img src="vollit_wallet/assets/readme_screens/verify2.jpeg" width="270" height="480" alt="verify2">
-<img src="vollit_wallet/assets/readme_screens/walletPage.jpeg" width="270" height="480" alt="walletPage">
+<img src="vollit_wallet/assets/readme_screens/choice.jpeg" width="270" height="500" alt="choice">
+<img src="vollit_wallet/assets/readme_screens/generate.jpeg" width="270" height="500" alt="generate">
+<img src="vollit_wallet/assets/readme_screens/genMnenomic.jpeg" width="270" height="500" alt="genMnenomic">
+<img src="vollit_wallet/assets/readme_screens/importSeed.jpeg" width="270" height="500" alt="importSeed">
+<img src="vollit_wallet/assets/readme_screens/onb1.jpeg" width="270" height="500" alt="onb1">
+<img src="vollit_wallet/assets/readme_screens/onb2.jpeg" width="270" height="500" alt="onb2">
+<img src="vollit_wallet/assets/readme_screens/onb3.jpeg" width="270" height="500" alt="onb3">
+<img src="vollit_wallet/assets/readme_screens/splash.jpeg" width="270" height="500" alt="splash">
+<img src="vollit_wallet/assets/readme_screens/verify.jpeg" width="270" height="500" alt="verify">
+<img src="vollit_wallet/assets/readme_screens/verify2.jpeg" width="270" height="500" alt="verify2">
+<img src="vollit_wallet/assets/readme_screens/walletPage.jpeg" width="270" height="500" alt="walletPage">
+<img src="vollit_wallet/assets/readme_screens/walletPage.jpeg" width="270" height="500" alt="walletPage">
+<img src="vollit_wallet/assets/readme_screens/walletPage.jpeg" width="270" height="500" alt="walletPage">
+
+and more...
