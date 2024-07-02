@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vollit_wallet/l10n/app_localizations.dart';
 import 'package:vollit_wallet/main.dart';
 import 'package:vollit_wallet/utils/constants.dart';
 
@@ -27,6 +28,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Onboard> demoData = [
+      Onboard(
+        image: 'assets/images/onboard1.png',
+        title:"Send crypto securely",
+        // title: AppLocalizations.of(context)!
+        //     .helloWorld, // Updated for localization
+        description: 'Secure way of sending and receiving cryptocurrency',
+      ),
+      Onboard(
+        image: 'assets/images/onboard2.png',
+        title: 'View Your NFTs and Assets',
+        description: 'View your NFTs and digital assets securely',
+      ),
+      Onboard(
+        image: 'assets/images/onboard3.png',
+        title: 'Send Crypto Safely',
+        description:
+            'With us, you don\'t need to worry about any security-related issues.',
+      ),
+    ];
+
     return Scaffold(
       backgroundColor: darkBackgroundColor,
       body: SafeArea(
@@ -135,25 +157,6 @@ class Onboard {
     required this.description,
   });
 }
-
-final List<Onboard> demoData = [
-  Onboard(
-    image: 'assets/images/onboard1.png',
-    title: 'Safe and Secure Cryptocurrency Wallet',
-    description: 'Secure way of sending and receiving cryptocurrency',
-  ),
-  Onboard(
-    image: 'assets/images/onboard2.png',
-    title: 'View Your NFTs and Assets',
-    description: 'View your NFTs and digital assets securely',
-  ),
-  Onboard(
-    image: 'assets/images/onboard3.png',
-    title: 'Send Crypto Safely',
-    description:
-        'With us, you don\'t need to worry about any security-related issues.',
-  ),
-];
 
 class OnBoardingContent extends StatelessWidget {
   final String image;

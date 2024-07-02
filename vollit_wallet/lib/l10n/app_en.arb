@@ -1,0 +1,10 @@
+{
+    "helloWorld" : "Hello World!",
+    "@helloWorld":{
+        "description": "The cojdfo"
+    },
+    "counterMsg" : "You have pushed the button this many times:",
+    "@counterMsg" : {
+        "description" : "You have puuttonthis many times;"
+    }
+}

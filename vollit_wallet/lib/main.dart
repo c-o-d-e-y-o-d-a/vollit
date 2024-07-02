@@ -1,6 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:vollit_wallet/l10n/app_localizations.dart';
 import 'package:vollit_wallet/pages/create_or_import_screen.dart';
 import 'package:vollit_wallet/pages/generate_mnenomic_page.dart';
 import 'package:vollit_wallet/pages/onboarding/onboarding_screens.dart';
@@ -21,16 +23,26 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       
+        
+      ],
+      locale: Locale('hi'),
+      supportedLocales: [
+        Locale('en'),
+        Locale('hi'),
+      ],
       home: AnimatedSplashScreen(
         splash: 'assets/images/logo.png',
-        splashIconSize: 2000.0,
+        splashIconSize: 200.0, // Adjusted size
         centered: true,
         nextScreen: OnboardingScreen(),
-        
         backgroundColor: darkBackgroundColor,
         duration: 4000,
-
       ),
     );
   }
@@ -42,23 +54,29 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: darkBackgroundColor,
-        title: Text('Vollit', style: TextStyle(
-          fontWeight: FontWeight.bold, color: Colors.white
-        ),),
+        title: Text(
+          'Vollit',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
         centerTitle: true,
       ),
       body: Container(
         decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            darkBackgroundColor,Color.fromARGB(255, 58, 59, 124), buttonColor
-          ],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight
-          )
+          gradient: LinearGradient(
+            colors: [
+              darkBackgroundColor,
+              Color.fromARGB(255, 58, 59, 124),
+              buttonColor
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
         ),
-        
         child: Center(
-          child:  Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
@@ -89,7 +107,6 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
